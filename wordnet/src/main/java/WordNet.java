@@ -43,7 +43,19 @@ public class WordNet {
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
         int verticesCount = buildIntToString(synsets);
+        StdOut.println("Mapper int -> str done");
         buildDigraph(hypernyms, verticesCount);
+        StdOut.println("Graph built");
+    }
+
+    // returns all WordNet nouns
+    public Iterable<String> nouns() {
+        Bag<String> nouns = new Bag<>();
+        for (int i = 0; i < intToString.length; ++i) {
+            for (String noun: intToString[i].split(" "))
+                nouns.add(noun);
+        }
+        return nouns;
     }
 
     public static void main(String[] args) {
